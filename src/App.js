@@ -1,28 +1,58 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {Component} from 'react';
+import logic from './logic'
+import {connect} from "react-redux";
+import PropTypes from "prop-types";
+import {setCustomers} from "./actions/index";
+import CustomerList from './components/CustomerList'
+import store from './store'
 
-class App extends Component {
+const mapDispatchToProps = dispatch => {
+  return {
+    setCustomers: customers => dispatch(setCustomers(customers))
+  };
+}
+
+
+class ConnectedApp extends Component {
+
+  state = {
+    error: '',
+  }
+
+  customers = []
+
+  onStoreChange = () => {
+    console.log('on store change)')
+    const storeCustomers = store.getState().customers
+    const dirtyCustomers = storeCustomers.filter(customer => customer.dirty)
+    if (dirtyCustomers.length > 0) logic.updateCustomers(dirtyCustomers)
+  }
+
+  componentDidMount() {
+    this.getCustomers()
+    store.subscribe(this.onStoreChange)
+  }
+
+  getCustomers = () => {
+    const {props: {setCustomers}} = this
+
+    logic.getCustomers()
+      .then(customers => {
+        this.customers = customers
+        setCustomers(customers)
+      })
+      .catch(error => this.setState({error: error.toString()}))
+  }
+
   render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
+    const {state: {error}} = this
+
+    return <div>
+      <CustomerList/>
+      {error && <h4>{error}</h4>}
+    </div>
   }
 }
 
-export default App;
+const App = connect(null, mapDispatchToProps)(ConnectedApp)
+export default App
