@@ -12,7 +12,6 @@ const mapDispatchToProps = dispatch => {
   };
 }
 
-
 class ConnectedApp extends Component {
 
   state = {
@@ -22,10 +21,11 @@ class ConnectedApp extends Component {
   customers = []
 
   onStoreChange = () => {
-    console.log('on store change)')
     const storeCustomers = store.getState().customers
     const dirtyCustomers = storeCustomers.filter(customer => customer.dirty)
     if (dirtyCustomers.length > 0) logic.updateCustomers(dirtyCustomers)
+      .then(response => console.log('successful update',))
+      .catch(error => this.setState({error: error.toString()}))
   }
 
   componentDidMount() {

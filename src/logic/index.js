@@ -39,12 +39,15 @@ const logic = {
    * @private
    */
   _apiCall(config, expectedResponse) {
+    config.baseURL = this._base
+    config.headers = { 'Authorization': `Token ${this._token}`}
     return Promise.resolve(() => {
       this._validateNumberField('expectedResponse', expectedResponse)
     })
       .then(() => axios.request(config))
       .then(response => {
         if (response.status === expectedResponse) {
+          console.log('received response', response)
           return response
         } else
           throw new Error(`Bad API call, status = ${response.status}`)
@@ -57,10 +60,6 @@ const logic = {
   getCustomers() {
     const config = {
       url: '/v1/customers/',
-      baseURL: this._base,
-      headers: {
-        'Authorization': `Token ${this._token}`
-      },
       method: 'GET',
     }
     return this._apiCall(config, 200)
@@ -79,13 +78,36 @@ const logic = {
 
   },
 
+  /**
+   * saves back to DB customers whose data has changed
+   * for now it just saves one customer
+   *
+   * @param dirtyCustomers
+   * @returns {Promise<void | never>}
+   */
   updateCustomers(dirtyCustomers) {
-    if (dirtyCustomers.length > 0) {
-      console.log('dirty customers',dirtyCustomers.length)
-    }
+    let customer, config
+    return Promise.resolve()
+      .then(() => {
+        if (dirtyCustomers.length <= 0) throw new Error('No customers to update')
+      })
+      .then(() => {
+        // let's just assume one for now to make it simple
+        customer = dirtyCustomers.pop()
+        config = {
+          url: `/v1/customers/${customer.id}/fields/name/`,
+          data: {"type": "string", "value": customer.name, "extra": {}},
+          method: 'PUT'
+        }
+        return this._apiCall(config, 200)
+      })
+      .then(() => {
+        config.url = `/v1/customers/${customer.id}/fields/email/`
+        config.data = {"type": "string", "value": customer.email, "extra": {}}
+        return this._apiCall(config, 200)
+      })
+
   }
-
-
 }
 
 
