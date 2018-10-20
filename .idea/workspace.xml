@@ -52,7 +52,7 @@
           <entry key="gitignore" value="27" />
           <entry key="html" value="8" />
           <entry key="js" value="8366" />
-          <entry key="md" value="222" />
+          <entry key="md" value="232" />
           <entry key="scss" value="404" />
         </counts>
       </usages-collector>
@@ -60,7 +60,7 @@
         <counts>
           <entry key="HTML" value="8" />
           <entry key="JavaScript" value="8366" />
-          <entry key="Markdown" value="222" />
+          <entry key="Markdown" value="232" />
           <entry key="PLAIN_TEXT" value="27" />
           <entry key="SCSS" value="404" />
         </counts>
@@ -146,7 +146,7 @@
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
               <first_editor relative-caret-position="44">
-                <caret line="2" column="50" lean-forward="true" selection-start-line="2" selection-start-column="50" selection-end-line="2" selection-end-column="50" />
+                <caret line="2" column="73" selection-start-line="2" selection-start-column="73" selection-end-line="2" selection-end-column="73" />
               </first_editor>
               <second_editor />
             </state>
@@ -322,12 +322,12 @@
       <workItem from="1539887531343" duration="3941000" />
       <workItem from="1539957460623" duration="14079000" />
       <workItem from="1540043900241" duration="4563000" />
-      <workItem from="1540059242873" duration="1107000" />
+      <workItem from="1540059242873" duration="1177000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="30474000" />
+    <option name="totallyTimeSpent" value="30544000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -525,7 +525,7 @@
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
           <first_editor relative-caret-position="44">
-            <caret line="2" column="50" lean-forward="true" selection-start-line="2" selection-start-column="50" selection-end-line="2" selection-end-column="50" />
+            <caret line="2" column="73" selection-start-line="2" selection-start-column="73" selection-end-line="2" selection-end-column="73" />
           </first_editor>
           <second_editor />
         </state>
