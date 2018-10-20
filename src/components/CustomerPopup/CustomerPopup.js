@@ -3,6 +3,7 @@ import {connect} from "react-redux";
 import PropTypes from "prop-types";
 import {modifyCustomer} from "../../actions/index"
 import {Container, Row, Col, Button, Label, Input, Form, FormGroup} from 'reactstrap'
+import './CustomerPopup.css'
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -54,6 +55,7 @@ class ConnectedCustomerPopup extends Component {
 
     return  <Form onSubmit={this.onSubmitChange}>
     <Container>
+      <Row ><h4 className="customerPopup__title">Customer Update &nbsp;<i className="fas fa-user fa-lg"></i></h4></Row>
         <Row>
           <FormGroup>
             <Label for="changeName">Customer Name</Label>

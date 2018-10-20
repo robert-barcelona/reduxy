@@ -60,8 +60,8 @@ class ConnectedApp extends Component {
     const {state: {message,error}} = this
 
     return <Container>
-      <Navbar color="light" light >
-        <NavbarBrand href="/">Landbot</NavbarBrand>
+      <Navbar color="dark" dark >
+        <NavbarBrand href="/">Landbot Customer Update</NavbarBrand>
       </Navbar>
       <Row>
        <h3 className="main__customerTitle">Customers</h3>
