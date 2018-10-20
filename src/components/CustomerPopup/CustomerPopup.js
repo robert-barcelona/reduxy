@@ -55,7 +55,7 @@ class ConnectedCustomerPopup extends Component {
 
     return  <Form onSubmit={this.onSubmitChange}>
     <Container>
-      <Row ><h4 className="customerPopup__title">Customer Update &nbsp;<i className="fas fa-user fa-lg"></i></h4></Row>
+      <Row ><h4 className="customerPopup__title">Update Customer&nbsp;<i className="fas fa-user fa-lg"></i></h4></Row>
         <Row>
           <FormGroup>
             <Label for="changeName">Customer Name</Label>

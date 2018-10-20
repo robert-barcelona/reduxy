@@ -16,6 +16,12 @@ const mapDispatchToProps = dispatch => {
 
 class ConnectedApp extends Component {
 
+
+  static propTypes = {
+    setCustomers: PropTypes.func
+  }
+
+
   state = {
     error: '',
     message:'',
