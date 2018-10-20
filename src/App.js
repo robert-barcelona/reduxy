@@ -3,8 +3,10 @@ import logic from './logic'
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
 import {setCustomers} from "./actions/index";
-import CustomerList from './components/CustomerList'
+import CustomerList from './components/CustomerList/CustomerList'
 import store from './store'
+import './App.css'
+import {Navbar,NavbarBrand,Container, Row, Alert} from 'reactstrap'
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -16,6 +18,7 @@ class ConnectedApp extends Component {
 
   state = {
     error: '',
+    message:'',
   }
 
   customers = []
@@ -24,8 +27,17 @@ class ConnectedApp extends Component {
     const storeCustomers = store.getState().customers
     const dirtyCustomers = storeCustomers.filter(customer => customer.dirty)
     if (dirtyCustomers.length > 0) logic.updateCustomers(dirtyCustomers)
-      .then(response => console.log('successful update',))
-      .catch(error => this.setState({error: error.toString()}))
+      .then(() => this.setMessage('','Successful update'))
+      .catch(error => this.setMessage(error.toString(),''))
+  }
+
+  clearMessages = () => {
+    this.setState({error:'',message:''})
+  }
+
+  setMessage = (error,message) => {
+    this.setState({error,message})
+    setTimeout(this.clearMessages,5000)
   }
 
   componentDidMount() {
@@ -35,7 +47,7 @@ class ConnectedApp extends Component {
 
   getCustomers = () => {
     const {props: {setCustomers}} = this
-
+    this.setState({error:'',message:''})
     logic.getCustomers()
       .then(customers => {
         this.customers = customers
@@ -45,12 +57,29 @@ class ConnectedApp extends Component {
   }
 
   render() {
-    const {state: {error}} = this
+    const {state: {message,error}} = this
 
-    return <div>
-      <CustomerList/>
-      {error && <h4>{error}</h4>}
-    </div>
+    return <Container>
+      <Navbar color="light" light >
+        <NavbarBrand href="/">Landbot</NavbarBrand>
+      </Navbar>
+      <Row>
+       <h3 className="main__customerTitle">Customers</h3>
+      </Row>
+      <Row>
+        <CustomerList/>
+      </Row>
+      <Row>
+        {error && <Alert color="danger">
+          {error}
+        </Alert>}
+      </Row>
+      <Row>
+      {message && <Alert color="info">
+        {message}
+      </Alert>}
+    </Row>
+    </Container>
   }
 }
 
