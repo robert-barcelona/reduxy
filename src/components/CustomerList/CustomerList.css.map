@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAAA,mBAAoB;EAEpB,MAAM,EAAC,iCAA8B;EACnC,aAAa,EAAC,GAAG;EAEnB,MAAM,EAAC,IAAI;EAET,OAAO,EAAC,GAAG",
+"sources": ["CustomerList.scss"],
+"names": [],
+"file": "CustomerList.css"
+}
