@@ -39,7 +39,7 @@ class ConnectedCustomerList extends Component {
                 {customer.name}&nbsp;<i className="fas fa-user"></i>
               </ListGroupItem>
             ))}
-            {customers.length === 0 && <span>Loading customers...</span>}
+            {customers.length === 0 && <span>No loaded customers yet...</span>}
           </ListGroup>}
           {isPop && popCust && <CustomerPopup
             id={popCust.id}
